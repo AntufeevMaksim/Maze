@@ -15,6 +15,7 @@ class ASCIIGraphics
   void DrawCell(int x, int y, Cell cell)
   {
      
+    Console.SetCursorPosition(4*x, 2*y+1);
 
     HashSet<Side> empty_walls = cell.Links;
 
@@ -25,7 +26,7 @@ class ASCIIGraphics
     Console.Write("+");
 
     //east wall
-    if(!empty_walls.Contains(Side.East))
+    if(!empty_walls.Contains(Side.West))
     {
       Console.SetCursorPosition(4*x, 2*y+2);
       Console.Write("|");

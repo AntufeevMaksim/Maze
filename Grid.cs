@@ -35,7 +35,7 @@ class Grid
     if(side == Side.North){return new int[]{x, y-1};}
     if(side == Side.South){return new int[]{x, y+1};}
     if(side == Side.West){return new int[]{x-1, y};}
-    return new int[]{x+1, y};;    
+    return new int[]{x+1, y};
   }
 
   Side RevertSide(Side side)
