@@ -3,6 +3,7 @@ class ASCIIGraphics
 {
   public void Draw(Grid grid)
   {
+    Console.Clear();
     for(int y=0; y<grid.Rows; y++)
     {
       for(int x=0; x<grid.Rows; x++)
@@ -25,7 +26,7 @@ class ASCIIGraphics
     Console.SetCursorPosition(4*x+4, 2*y+1);
     Console.Write("+");
 
-    //east wall
+    //west wall
     if(!empty_walls.Contains(Side.West))
     {
       Console.SetCursorPosition(4*x, 2*y+2);
@@ -39,6 +40,8 @@ class ASCIIGraphics
     Console.SetCursorPosition(4*x+4, 2*y+3);
     Console.Write("+");
 
+
+    //east wall
     if(!empty_walls.Contains(Side.East))
     {
       Console.SetCursorPosition(4*x+4, 2*y+2);
