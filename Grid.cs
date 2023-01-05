@@ -7,7 +7,7 @@ class Grid
   public int Rows {get => _rows;}
   public int Columns {get => _columns;}
 
-  public Grid(int rows, int columns)
+  public Grid(int columns, int rows)
   {
     _rows = rows;
     _columns = columns;
@@ -47,10 +47,10 @@ class Grid
   }
   void PrepareGrid()
   {
-    for(int y=0; y<_columns; y++)
+    for(int y=0; y<_rows; y++)
     {
       _grid.Add(new List<Cell>());
-      for(int x=0; x<_rows; x++)
+      for(int x=0; x<_columns; x++)
       {
         _grid[y].Add(new Cell());
       }

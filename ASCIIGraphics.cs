@@ -6,7 +6,7 @@ class ASCIIGraphics
     Console.Clear();
     for(int y=0; y<grid.Rows; y++)
     {
-      for(int x=0; x<grid.Rows; x++)
+      for(int x=0; x<grid.Columns; x++)
       {
         DrawCell(x,y, grid[x,y]);
       }
