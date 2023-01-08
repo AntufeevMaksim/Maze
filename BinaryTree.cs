@@ -1,7 +1,7 @@
 
-class BinaryTree
+class BinaryTree : Algorithm
 {
-  public Grid Run(Grid grid)
+  public override Grid Run(Grid grid)
   {
     Random random1 = new Random();
     int width = grid.Columns;

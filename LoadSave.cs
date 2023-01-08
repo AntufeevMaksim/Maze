@@ -5,7 +5,7 @@ class LoadSave
 {
   public void Save(string path, Grid grid)
   {
-    FileStream writer = new FileStream(path, FileMode.OpenOrCreate);
+    FileStream writer = new FileStream(path, FileMode.Create);
     DataContractSerializer ser = new DataContractSerializer(typeof(Grid));
 
     ser.WriteObject(writer, grid);

@@ -1,9 +1,9 @@
 
-class SideWinder
+class SideWinder : Algorithm
 {
-  public Grid Run(Grid grid)
+  public override Grid Run(Grid grid)
   {
-    ASCIIGraphics graphics = new();
+    TerminalInputOutput graphics = new();
 
     Random random = new();
     int width = grid.Columns;
