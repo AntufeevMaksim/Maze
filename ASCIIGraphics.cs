@@ -11,6 +11,9 @@ class ASCIIGraphics
         DrawCell(x,y, grid[x,y]);
       }
     }
+    Console.WriteLine(); //line feed
+    Console.WriteLine(); //line feed
+    Console.WriteLine(); //line feed
   }
 
   void DrawCell(int x, int y, Cell cell)

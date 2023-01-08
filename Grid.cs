@@ -1,7 +1,12 @@
+using System.Runtime.Serialization;
 
+[DataContract]
 class Grid
 {
+  [DataMember]
   int _rows, _columns;
+
+  [DataMember]
   List<List<Cell>> _grid = new List<List<Cell>>();
 
   public int Rows {get => _rows;}
