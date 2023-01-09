@@ -44,3 +44,4 @@ class Game
 
 
 // /home/maksim/ForPrograms/Maze/maze1.xml
+// -ns -s 10 10 /home/maksim/ForPrograms/Maze/maze1.xml

@@ -62,7 +62,19 @@ class Grid
     }
   }
 
+  public void MakeInputExit()
+  {
+    Random random = new();
 
+    int x_in = 0;
+    int y_in = random.Next(0, _rows);
+
+    int x_out = Columns-1;
+    int y_out = random.Next(0, _rows);
+
+    _grid[y_in][x_in].Type = CellType.Input;
+    _grid[y_out][x_out].Type = CellType.Exit;
+  }
 }
 
 

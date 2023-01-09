@@ -32,6 +32,7 @@ class SideWinder : Algorithm
     }
 
     grid = DrawUpLine(grid, width);
+    grid.MakeInputExit();
     return grid;
   }
 

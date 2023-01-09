@@ -31,7 +31,8 @@ class BinaryTree : Algorithm
     for(int y=height-1; y>0; y--)
     {
       grid.Link(width-1,y,Side.North);
-    }    
+    }
+    grid.MakeInputExit();  
     return grid;
   }
 }

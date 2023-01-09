@@ -8,7 +8,7 @@ class TerminalInputOutput
     {
       for(int x=0; x<grid.Columns; x++)
       {
-        DrawCell(x,y, grid[x,y]);
+        DrawCell(x,y, grid);
       }
     }
     Console.WriteLine(); //line feed
@@ -16,40 +16,103 @@ class TerminalInputOutput
     Console.WriteLine(); //line feed
   }
 
-  void DrawCell(int x, int y, Cell cell)
+  void DrawCell(int x, int y, Grid grid)
   {
-     
-    Console.SetCursorPosition(4*x, 2*y+1);
 
-    HashSet<Side> empty_walls = cell.Links;
+    DrawWallCrossings(x,y);
+
+    if (grid[x, y].Type == CellType.Usual)
+    {
+      DrawUsualCell(x, y, grid);
+    }
+    else
+    {
+      DrawInputExitCell(x, y, grid);
+    }
+  }
+
+  private void DrawUsualCell(int x, int y, Grid grid)
+  {
+    HashSet<Side> empty_walls = grid[x, y].Links;
 
     //north wall
-    Console.Write("+");
-    if(!empty_walls.Contains(Side.North)){Console.Write("---");}
-    Console.SetCursorPosition(4*x+4, 2*y+1);
-    Console.Write("+");
+    DrawNorthWall(x, y, empty_walls);
 
     //west wall
-    if(!empty_walls.Contains(Side.West))
-    {
-      Console.SetCursorPosition(4*x, 2*y+2);
-      Console.Write("|");
-    }
-    Console.SetCursorPosition(4*x, 2*y+3);
-    Console.Write("+");    
+    DrawWestWall(x, y, empty_walls);
 
     //south wall
-    if(!empty_walls.Contains(Side.South)){Console.Write("---");}
-    Console.SetCursorPosition(4*x+4, 2*y+3);
-    Console.Write("+");
+    DrawSouthWall(x, y, empty_walls);
 
 
     //east wall
-    if(!empty_walls.Contains(Side.East))
+    DrawEastWall(x, y, empty_walls);
+  }
+
+  void DrawInputExitCell(int x, int y, Grid grid)
+  {
+    HashSet<Side> empty_walls = grid[x,y].Links;
+
+    if(x != 0){DrawWestWall(x, y, empty_walls);}
+    if(x != grid.Columns-1){DrawEastWall(x, y, empty_walls);}
+
+    if(y != 0){DrawNorthWall(x, y, empty_walls);}
+    if(y != grid.Rows-1){DrawSouthWall(x, y, empty_walls);}
+  }
+
+  void DrawWallCrossings(int x, int y)
+  {
+    int tx = x*4;
+    int ty = y*2;
+
+    Console.SetCursorPosition(tx,ty);
+    Console.Write("+");
+
+    Console.SetCursorPosition(tx+4,ty);
+    Console.Write("+");
+
+    Console.SetCursorPosition(tx,ty+2);
+    Console.Write("+");
+
+    Console.SetCursorPosition(tx+4,ty+2);
+    Console.Write("+");
+  }
+
+
+  private void DrawEastWall(int x, int y, HashSet<Side> empty_walls)
+  {
+    if (!empty_walls.Contains(Side.East))
     {
-      Console.SetCursorPosition(4*x+4, 2*y+2);
+      Console.SetCursorPosition(4*x + 4, 2*y + 1);
       Console.Write("|");
-    }       
+    }
+  }
+
+  private void DrawSouthWall(int x, int y, HashSet<Side> empty_walls)
+  {
+    if (!empty_walls.Contains(Side.South))
+    {
+      Console.SetCursorPosition(4*x + 1, 2*y + 2);
+      Console.Write("---");
+    }
+  }
+
+  private void DrawWestWall(int x, int y, HashSet<Side> empty_walls)
+  {
+    if (!empty_walls.Contains(Side.West))
+    {
+      Console.SetCursorPosition(4*x, 2*y + 1);
+      Console.Write("|");
+    }
+  }
+
+  private void DrawNorthWall(int x, int y, HashSet<Side> empty_walls)
+  {
+    if (!empty_walls.Contains(Side.North))
+    {
+      Console.SetCursorPosition(4*x + 1, 2*y);
+      Console.Write("---");
+    }
   }
 
   public Args ParseInput()
