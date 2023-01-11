@@ -33,13 +33,13 @@ class Game
     Grid grid = new(args.Columns, args.Rows);
     grid = algorithm.Run(grid);
 
+    Dijkstra dijkstra = new();
+    grid = dijkstra.SolveMaze(grid);
+    
     if(args.GameMode == GameMode.NewAndSave)
     {
       load_save.Save(args.Path, grid);
     }
-
-    Dijkstra dijkstra = new();
-    grid = dijkstra.SolveMaze(grid);
     return grid;
   }
 }
@@ -47,3 +47,4 @@ class Game
 
 // /home/maksim/ForPrograms/Maze/maze1.xml
 // -ns -s 10 10 /home/maksim/ForPrograms/Maze/maze1.xml
+// -ns -s 3 3 /home/maksim/ForPrograms/Maze/maze1.xml
