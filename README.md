@@ -1,15 +1,15 @@
-Session Types: 
--n - create new maze
--ns - create and save new maze
--l - load maze
-
-Algorithms:
--s - SideWinder
--b - binary tree
-
-Examples:
--n -s 10 10
--ns -b 13 16 Mazes/maze.xml
--l Mazes/maze.xml
-
+Session Types:<br />
+#-n - create new maze<br />
+#-ns - create and save new maze<br />
+-l - load maze<br />
+<br />
+Algorithms:<br />
+-s - SideWinder<br />
+-b - binary tree<br />
+<br />
+Examples:<br />
+-n -s 10 10<br />
+-ns -b 13 16 Mazes/maze.xml<br />
+-l Mazes/maze.xml<br />
+<br />
 Nums are setting size.
