@@ -29,6 +29,15 @@ class TerminalInputOutput
     {
       DrawInputExitCell(x, y, grid);
     }
+
+    if(grid[x,y].CellOnWay)
+    {
+      Console.SetCursorPosition(4*x + 2, 2*y + 1);
+      Console.Write("🔴");
+    }
+      //  Console.SetCursorPosition(4*x + 2, 2*y + 1);
+      //  Console.Write(grid[x,y].Distance);
+
   }
 
   private void DrawUsualCell(int x, int y, Grid grid)

@@ -7,10 +7,15 @@ class Grid
   int _rows, _columns;
 
   [DataMember]
+  Cell _output_cell, _input_cell;
+
+  [DataMember]
   List<List<Cell>> _grid = new List<List<Cell>>();
 
   public int Rows {get => _rows;}
   public int Columns {get => _columns;}
+  public Cell OutputCell { get => _output_cell;}
+  internal Cell InputCell { get => _input_cell;}
 
   public Grid(int columns, int rows)
   {
@@ -34,6 +39,18 @@ class Grid
 
   }
 
+  public List<Cell> GetLinkedCells(Cell cell)
+  {
+    HashSet<Side> links = cell.Links;
+    List<Cell> linked_cells = new();
+
+    foreach(var link in links)
+    {
+      int[] link_cell = GetCoordsLinkedCell(cell.X, cell.Y, link);
+      linked_cells.Add(_grid[link_cell[1]][link_cell[0]]);
+    }
+    return linked_cells;
+  }
 
   int[] GetCoordsLinkedCell(int x, int y, Side side)
   {
@@ -57,7 +74,7 @@ class Grid
       _grid.Add(new List<Cell>());
       for(int x=0; x<_columns; x++)
       {
-        _grid[y].Add(new Cell());
+        _grid[y].Add(new Cell(x,y));
       }
     }
   }
@@ -71,6 +88,9 @@ class Grid
 
     int x_out = Columns-1;
     int y_out = random.Next(0, _rows);
+
+    _output_cell = _grid[y_out][x_out];
+    _input_cell = _grid[y_in][x_in];
 
     _grid[y_in][x_in].Type = CellType.Input;
     _grid[y_out][x_out].Type = CellType.Exit;

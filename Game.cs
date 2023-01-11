@@ -38,6 +38,8 @@ class Game
       load_save.Save(args.Path, grid);
     }
 
+    Dijkstra dijkstra = new();
+    grid = dijkstra.SolveMaze(grid);
     return grid;
   }
 }
