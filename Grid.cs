@@ -30,12 +30,13 @@ class Grid
    {
       get { return _grid[y][x];}
    }
+
   public void Link(int x, int y, Side side)
   {
-    _grid[y][x].Link(side);
+    Cell cell = _grid[y][x];
 
-    int[] coords = GetCoordsLinkedCell(x, y, side);
-    _grid[coords[1]][coords[0]].Link(RevertSide(side)); // carve wall in linked cell
+    cell.Link(side);
+    GetLinkedCell(cell, side).Link(RevertSide(side)); // carve wall in linked cell
 
   }
 
@@ -46,18 +47,19 @@ class Grid
 
     foreach(var link in links)
     {
-      int[] link_cell = GetCoordsLinkedCell(cell.X, cell.Y, link);
-      linked_cells.Add(_grid[link_cell[1]][link_cell[0]]);
+      linked_cells.Add(GetLinkedCell(cell, link));
     }
     return linked_cells;
   }
 
-  int[] GetCoordsLinkedCell(int x, int y, Side side)
+  Cell GetLinkedCell(Cell cell, Side side)
   {
-    if(side == Side.North){return new int[]{x, y-1};}
-    if(side == Side.South){return new int[]{x, y+1};}
-    if(side == Side.West){return new int[]{x-1, y};}
-    return new int[]{x+1, y};
+    int x = cell.X;
+    int y = cell.Y;
+    if(side == Side.North){return _grid[y-1][x];}
+    if(side == Side.South){return _grid[y+1][x];}
+    if(side == Side.West){return _grid[y][x-1];}
+    return _grid[y][x+1];
   }
 
   Side RevertSide(Side side)
