@@ -3,40 +3,32 @@ using System.Runtime.Serialization;
 [DataContract]
 class Cell
 {
-
   [DataMember]
-  HashSet<Side> _links = new HashSet<Side>();
-
+  public HashSet<Side> Links { get; private set; } = new HashSet<Side>();
   [DataMember]
-  CellType _type = CellType.Usual;
-
+  public CellType Type { get; set; } = CellType.Usual;
   [DataMember]
-  bool _cell_on_way = false;
-
+  public int? Distance { get; set; } = null;
   [DataMember]
-  int? distance = null;
-
+  public bool CellOnWay { get; set; }
   [DataMember]
-  int _x,_y;
-  
-  public HashSet<Side> Links { get => _links;}
-  public CellType Type { get => _type; set => _type = value;}
-  public int? Distance { get => distance; set => distance = value; }
-  public int X { get => _x;}
-  public int Y { get => _y;}
-  public bool CellOnWay { get => _cell_on_way; set => _cell_on_way = value; }
+  public int X { get; private set; }
+  [DataMember]
+  public int Y { get; private set; }
+
+
 
   public Cell(int x, int y)
   {
-    _x = x;
-    _y = y;
+    X = x;
+    Y = y;
 
   }
 
   public void Link(Side side)
   {
-    _links.Add(side);
-    
+    Links.Add(side);
+
   }
 }
 

@@ -42,9 +42,9 @@ class Dijkstra
 
     while (this_cell.Distance != 0)
     {
-      foreach(var cell in grid.GetLinkedCells(this_cell))
+      foreach (var cell in grid.GetLinkedCells(this_cell))
       {
-        if(cell.Distance<this_cell.Distance)
+        if (cell.Distance < this_cell.Distance)
         {
           this_cell = cell;
           this_cell.CellOnWay = true;
@@ -52,6 +52,6 @@ class Dijkstra
         }
       }
     }
-  return grid;
+    return grid;
   }
 }
