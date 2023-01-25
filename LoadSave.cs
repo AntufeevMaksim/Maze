@@ -18,7 +18,7 @@ class LoadSave
     XmlDictionaryReader reader = XmlDictionaryReader.CreateTextReader(fs, new XmlDictionaryReaderQuotas());
     DataContractSerializer ser = new DataContractSerializer(typeof(Grid));
 
-            // Deserialize the data and read it from the instance.
+    // Deserialize the data and read it from the instance.
     Grid grid = (Grid)ser.ReadObject(reader, true);
     reader.Close();
     fs.Close();

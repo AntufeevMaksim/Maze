@@ -1,13 +1,13 @@
 
 struct CellCoords
 {
-  int _x, _y;
+
+  public int X { get; private set; }
+  public int Y { get; private set; }
 
   public CellCoords(int x, int y)
   {
-    _x = x;
-    _y = y;
+    X = x;
+    Y = y;
   }
-  public int X { get => _x;}
-  public int Y { get => _y;}
 }

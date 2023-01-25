@@ -1,5 +1,5 @@
 
 class Algorithm
 {
-  public virtual Grid Run(Grid grid){return grid;}
+  public virtual Grid CreateMaze(Grid grid){return grid;}
 }

@@ -4,47 +4,49 @@ class Game
   public void Run()
   {
     TerminalInputOutput input_output = new TerminalInputOutput();
-    LoadSave load_save = new();
 
-    Args args = input_output.ParseInput();
+    GameParams args = input_output.ParseInput();
+
+    LoadSave load_save = new LoadSave();
     Grid grid = CreateGrid(load_save, args);
-    
+
     input_output.Draw(grid);
   }
 
-  private Grid CreateGrid(LoadSave load_save, Args args)
+  private Grid CreateGrid(LoadSave load_save, GameParams args)
   {
-    if(args.GameMode == GameMode.LoadMaze)
+    if (args.GameMode == GameMode.LoadMaze)
     {
       return load_save.Load(args.Path);
     }
 
 
     Algorithm algorithm;
-    if(args.Algorithm == AlgType.SideWinder)
+    switch (args.Algorithm)
     {
-      algorithm = new SideWinder();
-    }
-    else
-    {
-      algorithm = new BinaryTree();
+      case AlgType.SideWinder:
+        algorithm = new SideWinder();
+        break;
+
+      case AlgType.BinaryTree:
+        algorithm = new BinaryTree();
+        break;
+
+      default:
+        algorithm = new SideWinder();
+        break;
     }
 
     Grid grid = new(args.Columns, args.Rows);
-    grid = algorithm.Run(grid);
+    grid = algorithm.CreateMaze(grid);
 
     Dijkstra dijkstra = new();
     grid = dijkstra.SolveMaze(grid);
-    
-    if(args.GameMode == GameMode.NewAndSave)
+
+    if (args.GameMode == GameMode.NewAndSave)
     {
       load_save.Save(args.Path, grid);
     }
     return grid;
   }
 }
-
-
-// /home/maksim/ForPrograms/Maze/maze1.xml
-// -ns -s 10 10 /home/maksim/ForPrograms/Maze/maze1.xml
-// -ns -s 3 3 /home/maksim/ForPrograms/Maze/maze1.xml
